@@ -174,6 +174,6 @@ program.name("excalidraw-cli").description("Export Excalidraw files to PNG or SV
   }
   console.log(`
 ${succeeded} exported, ${failed} failed.`);
-  if (succeeded === 0) process.exit(1);
+  process.exit(succeeded === 0 ? 1 : 0);
 });
 program.parse();

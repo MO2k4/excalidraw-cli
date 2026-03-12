@@ -54,7 +54,7 @@ program
     }
 
     console.log(`\n${succeeded} exported, ${failed} failed.`)
-    if (succeeded === 0) process.exit(1)
+    process.exit(succeeded === 0 ? 1 : 0)
   })
 
 program.parse()
