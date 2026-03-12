@@ -1,7 +1,8 @@
 import fs from 'fs'
 import path from 'path'
 import './dom-shim.js'
-import { exportToSvg } from '@excalidraw/excalidraw'
+import excalidrawPkg from '@excalidraw/excalidraw'
+const { exportToSvg } = excalidrawPkg as any
 import { Resvg } from '@resvg/resvg-js'
 
 export interface ExportOptions {
