@@ -1,8 +1,6 @@
 import fs from 'fs'
 import path from 'path'
 import './dom-shim.js'
-import excalidrawPkg from '@excalidraw/excalidraw'
-const { exportToSvg } = excalidrawPkg as any
 import { Resvg } from '@resvg/resvg-js'
 
 export interface ExportOptions {
@@ -27,6 +25,10 @@ export async function exportFile(
 ): Promise<void> {
   const content = fs.readFileSync(inputPath, 'utf-8')
   const scene = parseScene(content)
+
+  // Dynamically import excalidraw after dom-shim is set up
+  const excalidrawPkg = await import('@excalidraw/excalidraw')
+  const exportToSvg = (excalidrawPkg.default || excalidrawPkg).exportToSvg as any
 
   const svgElement = await exportToSvg({
     elements: scene.elements as any,
