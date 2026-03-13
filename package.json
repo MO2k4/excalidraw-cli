@@ -24,7 +24,7 @@
     "prepublishOnly": "npm run build && npm test"
   },
   "dependencies": {
-    "@excalidraw/excalidraw": "^0.17.6",
+    "@excalidraw/excalidraw": "^0.18.0",
     "@resvg/resvg-js": "^2.6.0",
     "commander": "^14.0.3",
     "glob": "^13.0.6",
