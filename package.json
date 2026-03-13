@@ -6,6 +6,10 @@
   "bin": {
     "excalidraw-cli": "./dist/index.js"
   },
+  "files": ["dist"],
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "build": "tsup",
     "dev": "tsx src/index.ts",
@@ -14,7 +18,8 @@
     "test:watch": "vitest",
     "lint": "eslint src tests",
     "format": "prettier --write src tests",
-    "prepare": "husky"
+    "prepare": "husky",
+    "prepublishOnly": "npm run build && npm test"
   },
   "dependencies": {
     "@excalidraw/excalidraw": "^0.17.0",
