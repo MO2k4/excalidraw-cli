@@ -22,7 +22,7 @@ const stubCtx = new Proxy({} as CanvasRenderingContext2D, {
   has: () => true,
 })
 
-// @ts-ignore – patching jsdom's HTMLCanvasElement
+// @ts-expect-error – patching jsdom's HTMLCanvasElement
 window.HTMLCanvasElement.prototype.getContext = () => stubCtx
 
 const globals: Record<string, unknown> = {
@@ -52,7 +52,11 @@ const globals: Record<string, unknown> = {
   Path2D: Path2DStub,
   devicePixelRatio: 1,
   matchMedia: () => ({ matches: false, addListener: () => {}, removeListener: () => {} }),
-  ResizeObserver: class { observe() {} unobserve() {} disconnect() {} },
+  ResizeObserver: class {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  },
   MutationObserver: window.MutationObserver,
   location: window.location,
   screen: window.screen,

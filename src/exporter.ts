@@ -21,7 +21,7 @@ interface ExcalidrawScene {
 export async function exportFile(
   inputPath: string,
   outputPath: string,
-  options: ExportOptions
+  options: ExportOptions,
 ): Promise<void> {
   const content = fs.readFileSync(inputPath, 'utf-8')
   const scene = parseScene(content)

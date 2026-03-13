@@ -8,19 +8,17 @@ export interface FilePair {
 
 export async function resolveFiles(
   patterns: string[],
-  options: { output?: string; format: 'png' | 'svg' }
+  options: { output?: string; format: 'png' | 'svg' },
 ): Promise<FilePair[]> {
   const pairs: FilePair[] = []
 
   for (const pattern of patterns) {
     const matches = await glob(pattern, { absolute: true })
-    const excalidrawFiles = matches.filter(f => f.endsWith('.excalidraw'))
+    const excalidrawFiles = matches.filter((f) => f.endsWith('.excalidraw'))
 
     for (const inputPath of excalidrawFiles) {
       const basename = path.basename(inputPath, '.excalidraw')
-      const outputDir = options.output
-        ? path.resolve(options.output)
-        : path.dirname(inputPath)
+      const outputDir = options.output ? path.resolve(options.output) : path.dirname(inputPath)
       const outputPath = path.join(outputDir, `${basename}.${options.format}`)
       pairs.push({ inputPath, outputPath })
     }

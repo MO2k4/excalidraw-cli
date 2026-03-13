@@ -21,7 +21,7 @@ describe('resolveFiles', () => {
   it('expands a glob pattern and returns .excalidraw files only', async () => {
     const pairs = await resolveFiles([path.join(tmpDir, '*.excalidraw')], { format: 'png' })
     expect(pairs).toHaveLength(2)
-    expect(pairs.every(p => p.inputPath.endsWith('.excalidraw'))).toBe(true)
+    expect(pairs.every((p) => p.inputPath.endsWith('.excalidraw'))).toBe(true)
   })
 
   it('computes output path in same directory by default', async () => {
@@ -31,13 +31,16 @@ describe('resolveFiles', () => {
 
   it('computes output path in specified output directory', async () => {
     const outDir = path.join(tmpDir, 'out')
-    const pairs = await resolveFiles([path.join(tmpDir, 'a.excalidraw')], { format: 'svg', output: outDir })
+    const pairs = await resolveFiles([path.join(tmpDir, 'a.excalidraw')], {
+      format: 'svg',
+      output: outDir,
+    })
     expect(pairs[0].outputPath).toBe(path.join(outDir, 'a.svg'))
   })
 
   it('filters out non-.excalidraw files from glob', async () => {
     const pairs = await resolveFiles([path.join(tmpDir, '*')], { format: 'png' })
-    expect(pairs.every(p => p.inputPath.endsWith('.excalidraw'))).toBe(true)
+    expect(pairs.every((p) => p.inputPath.endsWith('.excalidraw'))).toBe(true)
   })
 
   it('returns empty array when no files match', async () => {

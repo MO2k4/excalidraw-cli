@@ -21,7 +21,9 @@ program
       process.exit(1)
     }
     if (opts.background !== 'white' && opts.background !== 'transparent') {
-      console.error(`Error: --background must be "white" or "transparent", got "${opts.background}"`)
+      console.error(
+        `Error: --background must be "white" or "transparent", got "${opts.background}"`,
+      )
       process.exit(1)
     }
 

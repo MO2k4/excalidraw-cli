@@ -69,8 +69,11 @@ describe('exportFile - error handling', () => {
     fs.writeFileSync(badFile, 'not json')
     await expect(
       exportFile(badFile, path.join(tmpDir, 'bad.png'), {
-        format: 'png', scale: 1, background: 'white', darkMode: false,
-      })
+        format: 'png',
+        scale: 1,
+        background: 'white',
+        darkMode: false,
+      }),
     ).rejects.toThrow()
   })
 
@@ -79,8 +82,11 @@ describe('exportFile - error handling', () => {
     fs.writeFileSync(badFile, JSON.stringify({ type: 'other', version: 2 }))
     await expect(
       exportFile(badFile, path.join(tmpDir, 'wrong.png'), {
-        format: 'png', scale: 1, background: 'white', darkMode: false,
-      })
+        format: 'png',
+        scale: 1,
+        background: 'white',
+        darkMode: false,
+      }),
     ).rejects.toThrow('Not a valid Excalidraw file')
   })
 })
