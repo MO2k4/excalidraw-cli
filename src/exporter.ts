@@ -28,16 +28,21 @@ export async function exportFile(
 
   // Dynamically import excalidraw after dom-shim is set up
   const excalidrawPkg = await import('@excalidraw/excalidraw')
-  const exportToSvg = (excalidrawPkg.default || excalidrawPkg).exportToSvg as any
+  type ExportToSvgFn = (params: {
+    elements: unknown[]
+    appState: Record<string, unknown>
+    files: Record<string, unknown>
+  }) => Promise<SVGElement>
+  const exportToSvg = (excalidrawPkg.default || excalidrawPkg).exportToSvg as ExportToSvgFn
 
   const svgElement = await exportToSvg({
-    elements: scene.elements as any,
+    elements: scene.elements,
     appState: {
       ...scene.appState,
       exportWithDarkMode: options.darkMode,
       exportBackground: options.background === 'white',
-    } as any,
-    files: (scene.files ?? {}) as any,
+    },
+    files: scene.files ?? {},
   })
 
   const svgString = new XMLSerializer().serializeToString(svgElement)
